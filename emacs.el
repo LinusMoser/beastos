@@ -101,6 +101,7 @@
 
 (add-hook 'c-mode-common-hook 'c-mode-indentation-deretard-hook)
 
+(setq warning-minimum-level :error)
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)

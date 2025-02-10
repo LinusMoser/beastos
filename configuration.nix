@@ -31,12 +31,34 @@
     pulse.enable = true;
   };
 
+  fileSystems."/" = {
+    neededForBoot = true;
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=10G" "mode=755" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/mapper/cryptroot"; # requires the root device to be mapped on cryptroot
+    fsType = "ext4";
+    neededForBoot = true;
+  };
+
+  environment.persistence."/nix/persist" = {
+    directories = [
+      "/etc/nixos"
+      "/home"
+      "/root"
+      "/var"
+      "/etc"
+    ];
+  };
+
   users.users.linus = {
     initialPassword = "letmecook";
     isNormalUser = true;
     extraGroups = [ "wheel" "libvirtd" ];
   };
-
 
   home-manager.users.linus = {
     home.stateVersion = "24.11";
@@ -128,7 +150,6 @@
     gopls
     git
     brave
-    webcord
     steam
     wget
     curl
@@ -146,7 +167,6 @@
     pkg-config
     gcc14
     clang-tools
-    gtkmm3
     gtkmm4
     jq
 
