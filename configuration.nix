@@ -77,6 +77,7 @@
     };
     home.file.".config/rofi/config.rasi".source = ./config/rofi/config.rasi;
     home.file.".config/starship.toml".source = ./config/starship/config.toml;
+    home.file.".config/a3/a3.png".source = ./config/a3/a3.png;
 
     home.shellAliases = {
       ll = "ls -al";
@@ -107,6 +108,16 @@
     qt = {
       enable = true;
       platformTheme.name = "qt5ct";
+    };
+
+    xdg.desktopEntries = {
+      a3 = {
+        name = "A3";
+        exec = "rdesktop -u linus.moser -d ad.informaticon.com 10.100.48.20 -f -r clipboard:PRIMARYCLIPBOARD";
+        icon = "/home/linus/.config/a3/a3.png";
+        terminal = false;
+        categories = [ "X-ERP" "Utility" ];
+      };
     };
   };
 
@@ -169,6 +180,7 @@
     clang-tools
     gtkmm4
     jq
+    rdesktop
 
     pavucontrol
     mako
