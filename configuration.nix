@@ -116,16 +116,6 @@
       enable = true;
       platformTheme.name = "qt5ct";
     };
-
-    xdg.desktopEntries = {
-      a3 = {
-        name = "A3";
-        exec = "remmina -c /home/linus/.config/a3/a3.remmina";
-        icon = "/home/linus/.config/a3/a3.png";
-        terminal = false;
-        categories = [ "X-ERP" "Utility" ];
-      };
-    };
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -188,7 +178,8 @@
     gtkmm4
     jq
     remmina
-
+    _1password-gui
+    
     pavucontrol
     mako
     libnotify
