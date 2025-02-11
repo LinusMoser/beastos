@@ -24,6 +24,10 @@
   services.xserver.xkb.layout = "ch";
   console.useXkbConfig = true;
 
+  services.gnome.gnome-keyring.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+
   hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
@@ -77,7 +81,10 @@
     };
     home.file.".config/rofi/config.rasi".source = ./config/rofi/config.rasi;
     home.file.".config/starship.toml".source = ./config/starship/config.toml;
-    home.file.".config/a3/a3.png".source = ./config/a3/a3.png;
+    home.file.".config/a3/" = {
+      source = ./config/a3;
+      recursive = true;
+    };
 
     home.shellAliases = {
       ll = "ls -al";
@@ -113,7 +120,7 @@
     xdg.desktopEntries = {
       a3 = {
         name = "A3";
-        exec = "rdesktop -u linus.moser -d ad.informaticon.com 10.100.48.20 -f -r clipboard:PRIMARYCLIPBOARD";
+        exec = "remmina -c /home/linus/.config/a3/a3.remmina";
         icon = "/home/linus/.config/a3/a3.png";
         terminal = false;
         categories = [ "X-ERP" "Utility" ];
@@ -180,7 +187,7 @@
     clang-tools
     gtkmm4
     jq
-    rdesktop
+    remmina
 
     pavucontrol
     mako
