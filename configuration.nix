@@ -17,6 +17,10 @@
   };
 
   networking.hostName = "beast";
+  networking.useDHCP = false;
+  networking.bridges.br0.interfaces = [ "eth0" ];
+  networking.interfaces.br0.useDHCP = true;
+  
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -57,6 +61,8 @@
       "/etc"
     ];
   };
+
+  
 
   users.users.linus = {
     initialPassword = "letmecook";
