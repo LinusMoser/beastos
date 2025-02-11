@@ -1,4 +1,4 @@
-{ config, lib, pkgs, home-manager, ... }:
+{ config, lib, pkgs, pkgs-unstable, home-manager, ... }:
 
 {
   imports =
@@ -60,9 +60,7 @@
       "/var"
       "/etc"
     ];
-  };
-
-  
+  };  
 
   users.users.linus = {
     initialPassword = "letmecook";
@@ -87,10 +85,6 @@
     };
     home.file.".config/rofi/config.rasi".source = ./config/rofi/config.rasi;
     home.file.".config/starship.toml".source = ./config/starship/config.toml;
-    home.file.".config/a3/" = {
-      source = ./config/a3;
-      recursive = true;
-    };
 
     home.shellAliases = {
       ll = "ls -al";
@@ -206,10 +200,10 @@
     waybar
     playerctl
     pamixer
+    pkgs-unstable.hyprlock
   ];
 
   programs.hyprland.enable = true;
-  programs.hyprlock.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
