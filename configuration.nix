@@ -90,7 +90,7 @@
       ll = "ls -al";
       s = "sudo";
       sc = "grim -g \"$(slurp)\" - | wl-copy";
-      sysmacs = "sudo emacs -nw --no-init-file --load ~/.emacs /etc/nixos/configuration.nix";
+      sysmacs = "emacsclient -c -a '' -nw /sudo::/etc/nixos/configuration.nix";
       unleash-desktop = "sudo nixos-rebuild switch --flake /etc/nixos#desktop";
       unleash-notebook = "sudo nixos-rebuild switch --flake /etc/nixos#notebook";
       unleash-glitches = "sudo nixos-rebuild switch --flake /etc/nixos#desktop-nvidia";
@@ -98,6 +98,63 @@
 
     programs.bash.enable = true; # required to make shellAliases work.
     programs.starship.enable = true; # required to fix bash, visually.
+
+    xdg.desktopEntries.emacs = {
+      name = "Emacs";
+      comment = "Unleash raw power";
+      exec = "emacsclient -c -a \"\" %F";
+      icon = "emacs";
+      terminal = false;
+      type = "Application";
+      categories = [ "Development" "TextEditor" ];
+      mimeType = [
+        "text/english"
+        "text/plain"
+        "text/x-go"
+        "text/x-makefile"
+        "text/x-c++hdr"
+        "text/x-c++src"
+        "text/x-chdr"
+        "text/x-csrc"
+        "text/x-java"
+        "text/x-moc"
+        "text/x-pascal"
+        "text/x-tcl"
+        "text/x-tex"
+        "application/x-shellscript"
+        "text/x-c"
+        "text/x-c++"
+        "x-scheme-handler/org-protocol"
+      ];
+    };
+
+    xdg.desktopEntries.emacsclient = {
+      name = "Emacs (Client)";
+      noDisplay = true;
+    };
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/english" = [ "emacs.desktop" ];
+        "text/x-go" = [ "emacs.desktop" ];
+        "text/plain" = [ "emacs.desktop" ];
+        "text/x-makefile" = [ "emacs.desktop" ];
+        "text/x-c++hdr" = [ "emacs.desktop" ];
+        "text/x-c++src" = [ "emacs.desktop" ];
+        "text/x-chdr" = [ "emacs.desktop" ];
+        "text/x-csrc" = [ "emacs.desktop" ];
+        "text/x-java" = [ "emacs.desktop" ];
+        "text/x-moc" = [ "emacs.desktop" ];
+        "text/x-pascal" = [ "emacs.desktop" ];
+        "text/x-tcl" = [ "emacs.desktop" ];
+        "text/x-tex" = [ "emacs.desktop" ];
+        "application/x-shellscript" = [ "emacs.desktop" ];
+        "text/x-c" = [ "emacs.desktop" ];
+        "text/x-c++" = [ "emacs.desktop" ];
+        "x-scheme-handler/org-protocol" = [ "emacs.desktop" ];
+      };
+    };
 
     gtk = {
       enable = true;
@@ -115,6 +172,15 @@
     qt = {
       enable = true;
       platformTheme.name = "qt5ct";
+    };
+
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
+      };
     };
   };
 
@@ -179,6 +245,8 @@
     jq
     remmina
     _1password-gui
+    mission-center
+    python39
     
     pavucontrol
     mako

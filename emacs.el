@@ -34,7 +34,7 @@
   :ensure t)
 
 (use-package treemacs
-  :ensure t)
+  :defer t)
 
 (use-package eat
   :ensure t)
@@ -180,14 +180,18 @@
 
 (add-hook 'eat-mode-hook (lambda () (display-line-numbers-mode -1)))
 
-
 (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 ;; Visual configuration
 
-(set-frame-font "Iosevka Medium-12" nil t)
-(set-fontset-font t 'unicode "Nerd Font Mono" nil 'prepend)
+(add-to-list 'default-frame-alist '(font . "Iosevka Medium-12"))
+(set-fontset-font t 'unicode "Nerd Font Mono" nil 'append)
 (scroll-bar-mode -1)
+(midnight-mode 1)
+
+(setq tramp-allow-unsafe-temporary-files t)
+(setq auth-source-save-behavior nil)
+
 
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
