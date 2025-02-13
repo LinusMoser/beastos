@@ -185,7 +185,8 @@
 ;; Visual configuration
 
 (add-to-list 'default-frame-alist '(font . "Iosevka Medium-12"))
-(set-fontset-font t 'unicode "Nerd Font Mono" nil 'append)
+(add-to-list 'default-frame-alist '(font . "Nerd Font Mono"))
+;; (set-fontset-font t 'unicode "Nerd Font Mono" nil 'append)
 (scroll-bar-mode -1)
 (midnight-mode 1)
 
