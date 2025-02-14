@@ -247,6 +247,9 @@
     _1password-gui
     mission-center
     python39
+
+    libvterm # required for vterm in emacs
+    libtool # required for vterm compilation in emacs
     
     pavucontrol
     mako

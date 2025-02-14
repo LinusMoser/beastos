@@ -3,6 +3,8 @@
 
 ;; Package Initialization
 
+(require 'vterm)
+
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
@@ -36,7 +38,7 @@
 (use-package treemacs
   :defer t)
 
-(use-package eat
+(use-package vterm
   :ensure t)
 
 (use-package go-mode
@@ -126,18 +128,17 @@
 (global-set-key (kbd "C-w") 'clipboard-kill-region)
 (global-set-key (kbd "C-y") 'clipboard-yank)
 (global-set-key (kbd "C-v") 'clipboard-yank)
+(global-set-key (kbd "C-b") 'switch-to-last-buffer)
+(global-set-key (kbd "C-q") 'other-window)
 ;; C-q is catched before it is passed to any subprocess
 ;; no terminal fucks with my window switching keybinds
 (define-key input-decode-map (kbd "C-q") [override-window-switch])
 (global-set-key [override-window-switch] 'other-window)
-;; C-b is also inevitable
-;; switches to the last buffer in that window
-(define-key input-decode-map (kbd "C-b") [override-buffer-switch])
-(global-set-key [override-buffer-switch]
-                (lambda ()
-                  (interactive)
-                  (switch-to-buffer (other-buffer))
-                  ))
+
+(defun switch-to-last-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer)))
+
 ;; Find definition
 (global-set-key (kbd "C-<return>") 'xref-find-definitions)
 
@@ -170,22 +171,32 @@
 
 (global-set-key (kbd "C-c t") 'start-terminal)
 
+(setq vterm-shell "bash")
+
 (defun start-terminal ()
   (interactive)
   (let ((new-window (split-window nil -10 'below))
         (default-directory (or (buffer-local-value 'default-directory (current-buffer))
                                default-directory)))
     (select-window new-window)
-    (eat "bash")))
+    (vterm)))
 
-(add-hook 'eat-mode-hook (lambda () (display-line-numbers-mode -1)))
+(add-hook 'vterm-exit-functions
+          (lambda (_buffer _event)
+            (let* ((buffer (current-buffer))
+                   (window (get-buffer-window buffer)))
+              (when window
+                (delete-window window))
+              (kill-buffer buffer))))
+
+(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode -1)))
+
 
 ;; Visual configuration
 
 (add-to-list 'default-frame-alist '(font . "Iosevka Medium-12"))
-(add-to-list 'default-frame-alist '(font . "Nerd Font Mono"))
 ;; (set-fontset-font t 'unicode "Nerd Font Mono" nil 'append)
 (scroll-bar-mode -1)
 (midnight-mode 1)
