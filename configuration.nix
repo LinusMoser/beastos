@@ -257,7 +257,7 @@
     slurp
     grim
     wl-clipboard
-    sysmenu
+    rofi-wayland
     waybar
     playerctl
     pamixer
