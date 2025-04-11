@@ -102,6 +102,7 @@
     asciidoctor
     unzip
     nodejs_22
+    buf
 
     pavucontrol
     networkmanagerapplet

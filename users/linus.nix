@@ -56,6 +56,11 @@
       unleash = "home-manager switch --flake path:/etc/nixos#linus";
     };
 
+    home.sessionVariables = {
+      SSH_AUTH_SOCK = "/home/linus/.1password/agent.sock";
+      GOPRIVATE="github.com/informaticon/*";
+    };
+
     programs.bash.enable = true; # required to make shellAliases work.
     programs.starship.enable = true; # required to fix bash, visually.
 
