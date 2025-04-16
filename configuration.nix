@@ -83,8 +83,8 @@
     nautilus
     kitty
     gh
-    go
-    gopls
+    pkgs-unstable.go
+    pkgs-unstable.gopls
     fastfetch
     starship
     cmake
