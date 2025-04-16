@@ -72,8 +72,8 @@
     home-manager
 
     emacs
-    go
-    gopls
+    pkgs-unstable.go
+    pkgs-unstable.gopls
     git
     brave
     steam
@@ -105,6 +105,7 @@
     buf
 
     pavucontrol
+    brightnessctl
     networkmanagerapplet
     swaynotificationcenter
     libnotify

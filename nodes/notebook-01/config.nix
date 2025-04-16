@@ -11,12 +11,6 @@
 
   networking.hostName = "beast-notebook-01";
 
-  fileSystems."/" = {
-    neededForBoot = true;
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=50%" "mode=755" ];
-  };
 
   fileSystems."/nix" = {
     device = "/dev/mapper/cryptroot"; # requires the root device to be mapped on cryptroot
@@ -35,6 +29,6 @@
   };
 
   programs.bash.shellAliases = {
-    snleash = "sudo nixos-rebuild switch --flake path:/etc/nixos#desktop-03";
+    snleash = "sudo nixos-rebuild switch --flake path:/etc/nixos#notebook-01";
   };
 }
