@@ -11,7 +11,6 @@
 
   networking.hostName = "beast-notebook-01";
 
-
   fileSystems."/nix" = {
     device = "/dev/mapper/cryptroot"; # requires the root device to be mapped on cryptroot
     fsType = "ext4";

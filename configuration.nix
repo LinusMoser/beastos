@@ -2,6 +2,7 @@
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.build-dir = "/var/tmp/nix-build";
   
   boot.loader.grub = {
     enable = true;
@@ -81,7 +82,7 @@
     curl
     vscode
     nautilus
-    kitty
+    alacritty
     gh
     pkgs-unstable.go
     pkgs-unstable.gopls
@@ -103,6 +104,7 @@
     unzip
     nodejs_22
     buf
+    teleport
 
     pavucontrol
     brightnessctl
